@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sofía Salvatierra — Administración y Marketing</title>
+  <meta name="description" content="Portfolio de Sofía Salvatierra, Licenciada en Administración con formación en Marketing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F6F4F8;
+      --soft: #E8E2EE;
+      --ink: #22182E;
+      --muted: #665B74;
+      --line: #D3CADD;
+      --accent: #B3266B;
+      --accent-ink: #FFFFFF;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1A1224;
+        --soft: #2B2038;
+        --ink: #F1ECF6;
+        --muted: #B0A5BF;
+        --line: #3B2E4C;
+        --accent: #F07DB2;
+        --accent-ink: #1A1224;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--ink);
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 1.0625rem; line-height: 1.6;
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+    h1, h2, h3, .logo { font-family: "Bricolage Grotesque", sans-serif; }
+
+    /* ESPACIOS PARA IMÁGENES: si el archivo existe se muestra; si no, aparece el aviso gris */
+    .ph {
+      position: relative; overflow: hidden; background: var(--soft);
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      padding: 1rem; color: var(--muted); font-size: 0.9rem;
+    }
+    .ph::before { content: attr(data-ph); }
+    .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    /* Navegación */
+    header { border-bottom: 1px solid var(--line); }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 0; gap: 1rem; flex-wrap: wrap; }
+    .logo { font-weight: 700; text-decoration: none; }
+    nav ul { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+    nav ul a { text-decoration: none; color: var(--muted); }
+    nav ul a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+    /* Portada */
+    .hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: center; padding: 4.5rem 0; }
+    .hero h1 {
+      font-weight: 800; font-size: clamp(2.8rem, 8vw, 5.5rem);
+      line-height: 0.98; letter-spacing: -0.03em;
+    }
+    .hero p { margin-top: 1.5rem; max-width: 30rem; font-size: 1.2rem; color: var(--muted); }
+    .btns { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2rem; }
+    .btn {
+      display: inline-block; padding: 0.8rem 1.4rem; border-radius: 999px;
+      text-decoration: none; font-weight: 500; border: 2px solid var(--accent);
+      background: var(--accent); color: var(--accent-ink); transition: transform .15s;
+    }
+    .btn.alt { background: transparent; color: var(--ink); border-color: var(--line); }
+    .btn:hover { transform: translateY(-2px); }
+    .hero .ph { aspect-ratio: 4 / 5; border-radius: 200px 200px 12px 12px; }
+
+    /* Secciones */
+    section { padding: 4rem 0; border-top: 1px solid var(--line); }
+    h2 { font-size: 2rem; letter-spacing: -0.01em; margin-bottom: 2rem; }
+
+    /* Sobre mí */
+    .about { display: grid; grid-template-columns: 1fr 1.6fr; gap: 3rem; align-items: start; }
+    .about .ph { aspect-ratio: 1 / 1; border-radius: 12px; }
+    .about p + p { margin-top: 1rem; }
+    .skills { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin-top: 1.5rem; }
+    .skills li { padding: 0.35rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.95rem; }
+
+    /* Formación */
+    .edu { list-style: none; }
+    .edu li { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
+    .edu li:first-child { border-top: 1px solid var(--line); }
+    .edu .year { color: var(--accent); font-weight: 500; }
+    .edu strong { display: block; font-family: "Bricolage Grotesque", sans-serif; font-size: 1.2rem; font-weight: 700; }
+    .edu span { color: var(--muted); }
+
+    /* Proyectos */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem; }
+    .project .ph { aspect-ratio: 4 / 3; border-radius: 6px; }
+    .project h3 { font-size: 1.3rem; line-height: 1.2; margin-top: 1rem; }
+    .project p { color: var(--muted); margin-top: 0.4rem; }
+    .project .tags { color: var(--accent); font-size: 0.95rem; }
+
+    /* Galería */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem; }
+    .gallery .ph { aspect-ratio: 1 / 1; border-radius: 6px; }
+
+    /* Contacto */
+    .mail { font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: clamp(1.4rem, 5vw, 2.75rem); word-break: break-word; }
+    .mail:hover { color: var(--accent); }
+    .social { display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+
+    footer { padding: 2rem 0 3rem; color: var(--muted); font-size: 0.95rem; }
+
+    @media (max-width: 45rem) {
+      .hero, .about { grid-template-columns: 1fr; gap: 2rem; }
+      .hero .ph { max-width: 20rem; }
+      .edu li { grid-template-columns: 1fr; gap: 0.2rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap">
+      <nav aria-label="Principal">
+        <a class="logo" href="#inicio">Sofía Salvatierra</a>
+        <ul>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#formacion">Formación</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- PORTADA -->
+    <div class="hero" id="inicio">
+      <div>
+        <h1>Sofía<br>Salvatierra</h1>
+        <!-- CAMBIAR: frase de presentación -->
+        <p>Licenciada en Administración con formación en Marketing. Ayudo a que los negocios se ordenen, crezcan y lleguen a más clientes.</p>
+        <div class="btns">
+          <a class="btn" href="#proyectos">Ver mis proyectos</a>
+          <a class="btn alt" href="#contacto">Contactarme</a>
+        </div>
+      </div>
+      <!-- IMAGEN: tu foto principal → imagenes/foto-sofia.jpg -->
+      <div class="ph" data-ph="Tu foto aquí: imagenes/foto-sofia.jpg">
+        <img src="imagenes/foto-sofia.jpg" alt="Retrato de Sofía Salvatierra" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre-mi">
+      <h2>Sobre mí</h2>
+      <div class="about">
+        <!-- IMAGEN: otra foto (trabajando, en un evento, etc.) → imagenes/sobre-mi.jpg -->
+        <div class="ph" data-ph="Otra foto aquí: imagenes/sobre-mi.jpg">
+          <img src="imagenes/sobre-mi.jpg" alt="Sofía trabajando" onerror="this.style.display='none'">
+        </div>
+        <div>
+          <!-- CAMBIAR: cuenta quién eres y qué te mueve -->
+          <p>Soy Sofía, licenciada en Administración. Me interesa entender cómo funciona un negocio por dentro —sus números, sus equipos, sus procesos— y usar el marketing para que su propuesta llegue a las personas indicadas.</p>
+          <p>Me formé en marketing para sumar a la gestión una mirada de cliente: qué necesita, cómo decide y cómo se comunica con él.</p>
+          <!-- CAMBIAR: tus habilidades -->
+          <ul class="skills">
+            <li>Gestión de proyectos</li>
+            <li>Plan de marketing</li>
+            <li>Redes sociales</li>
+            <li>Análisis de costos</li>
+            <li>Investigación de mercado</li>
+            <li>Atención al cliente</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMACIÓN -->
+    <section id="formacion">
+      <h2>Formación</h2>
+      <!-- CAMBIAR: copia y pega un <li> por cada título o curso -->
+      <ul class="edu">
+        <li>
+          <div class="year">año 1 – año 2</div>
+          <div><strong>Licenciatura en Administración</strong><span>Nombre de la universidad</span></div>
+        </li>
+        <li>
+          <div class="year">año</div>
+          <div><strong>Curso de Marketing Digital</strong><span>Institución o plataforma</span></div>
+        </li>
+        <li>
+          <div class="year">año</div>
+          <div><strong>Curso de Redes Sociales y Contenido</strong><span>Institución o plataforma</span></div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos">
+      <h2>Proyectos</h2>
+      <div class="grid">
+        <!-- CAMBIAR: copia y pega un <article> por proyecto. Imagen → imagenes/proyecto1.jpg, proyecto2.jpg... -->
+        <article class="project">
+          <div class="ph" data-ph="Imagen aquí: imagenes/proyecto1.jpg">
+            <img src="imagenes/proyecto1.jpg" alt="Plan de marketing para un negocio local" onerror="this.style.display='none'">
+          </div>
+          <h3>Plan de marketing para un negocio local</h3>
+          <p>Describe en dos líneas qué necesitaba el negocio, qué hiciste y qué resultado obtuviste.</p>
+          <p class="tags">Estrategia, Redes sociales</p>
+        </article>
+
+        <article class="project">
+          <div class="ph" data-ph="Imagen aquí: imagenes/proyecto2.jpg">
+            <img src="imagenes/proyecto2.jpg" alt="Campaña en redes sociales" onerror="this.style.display='none'">
+          </div>
+          <h3>Campaña en redes sociales</h3>
+          <p>Cuenta el objetivo de la campaña, el público al que iba dirigida y qué alcance tuvo.</p>
+          <p class="tags">Contenido, Instagram</p>
+        </article>
+
+        <article class="project">
+          <div class="ph" data-ph="Imagen aquí: imagenes/proyecto3.jpg">
+            <img src="imagenes/proyecto3.jpg" alt="Análisis de costos y organización" onerror="this.style.display='none'">
+          </div>
+          <h3>Análisis de costos y organización</h3>
+          <p>Explica cómo ordenaste procesos o números de una empresa y qué mejoró gracias a eso.</p>
+          <p class="tags">Administración, Excel</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section id="galeria">
+      <h2>Galería</h2>
+      <!-- IMAGEN: certificados, eventos, presentaciones, piezas gráficas → imagenes/galeria1.jpg ... galeria4.jpg -->
+      <div class="gallery">
+        <div class="ph" data-ph="imagenes/galeria1.jpg"><img src="imagenes/galeria1.jpg" alt="Galería 1" onerror="this.style.display='none'"></div>
+        <div class="ph" data-ph="imagenes/galeria2.jpg"><img src="imagenes/galeria2.jpg" alt="Galería 2" onerror="this.style.display='none'"></div>
+        <div class="ph" data-ph="imagenes/galeria3.jpg"><img src="imagenes/galeria3.jpg" alt="Galería 3" onerror="this.style.display='none'"></div>
+        <div class="ph" data-ph="imagenes/galeria4.jpg"><img src="imagenes/galeria4.jpg" alt="Galería 4" onerror="this.style.display='none'"></div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <h2>Trabajemos juntos</h2>
+      <!-- CAMBIAR: tu email (dos veces) -->
+      <a class="mail" href="mailto:sofia@ejemplo.com">sofia@ejemplo.com</a>
+      <div class="social">
+        <!-- CAMBIAR: tus enlaces; borra los que no uses -->
+        <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://instagram.com/tu-usuario" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/59800000000" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> Sofía Salvatierra</div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
